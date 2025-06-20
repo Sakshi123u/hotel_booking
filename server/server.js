@@ -12,11 +12,11 @@ const app = express();
 app.use(cors());
 
 // middleware
+app.use(express.json()); 
 app.use(clerkMiddleware());
-app.use(express.json()); // ✅ for all other routes
 
-// ✅ Use express.raw() only for the Clerk webhook route
-app.post("/api/clerk", express.raw({ type: "*/*" }), clerkWebhooks);
+//api to listen to clerk webhooks
+app.use("/api/clerk",clerkWebhooks);
 
 app.get('/', (req, res) => res.send("API is working"));
 
