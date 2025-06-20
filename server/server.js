@@ -1,4 +1,5 @@
 import express from "express";
+import bodyParser from "body-parser";
 import "dotenv/config";
 import cors from "cors";
 import connectDB from "./configs/db.js";
@@ -11,6 +12,8 @@ const app = express();
 
 app.use(cors());
 
+
+app.use("/api/clerk", bodyParser.raw({ type: "*/*" }));
 // middleware
 app.use(express.json()); 
 app.use(clerkMiddleware());
